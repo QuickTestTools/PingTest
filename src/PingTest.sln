@@ -5,10 +5,7 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PingTest", "PingTest\PingTest.csproj", "{FBF479B2-C758-430A-AD45-DF4DA1147E3E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{FACC26EA-A2D2-4922-9976-F3225E91EFBF}"
-	ProjectSection(SolutionItems) = preProject
-		..\build.bat = ..\build.bat
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_build", "_build\_build.csproj", "{483BAA20-0E73-4CD3-B9ED-9E09DDA0922C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +17,10 @@ Global
 		{FBF479B2-C758-430A-AD45-DF4DA1147E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBF479B2-C758-430A-AD45-DF4DA1147E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBF479B2-C758-430A-AD45-DF4DA1147E3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{483BAA20-0E73-4CD3-B9ED-9E09DDA0922C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{483BAA20-0E73-4CD3-B9ED-9E09DDA0922C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{483BAA20-0E73-4CD3-B9ED-9E09DDA0922C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{483BAA20-0E73-4CD3-B9ED-9E09DDA0922C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

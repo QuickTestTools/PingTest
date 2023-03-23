@@ -6,10 +6,13 @@ using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Threading;
 
-var currentCulture = Thread.CurrentThread.CurrentCulture;
-var textManager = TextManager.GetInstance(currentCulture.Name);
+var currentCultureName = Thread.CurrentThread.CurrentCulture?.Name;
+if (currentCultureName == null)
+    currentCultureName = "en-US";
+
+var textManager = TextManager.GetInstance(currentCultureName);
 var title = textManager.GetText(Texts.Title);
-var version = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
+var version = "1.0.0";
 Console.Title = title;
 Console.WriteLine(textManager.GetText(Texts.WelcomeText, title, version));
 Console.WriteLine(textManager.GetText(Texts.RepoUrl, "https://github.com/QuickTestTools/PingTest"));

@@ -3,7 +3,7 @@
 namespace PingTest
 {
     [TextResource]
-    internal enum Texts
+    public enum Texts
     {
         [Text("en-US", "MM/dd/yyyy HH:mm:ss")]
         [Text("zh-CN", "yyyy-MM-dd HH:mm:ss")]
