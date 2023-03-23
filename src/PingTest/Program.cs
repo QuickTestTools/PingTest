@@ -12,7 +12,7 @@ if (currentCultureName == null)
 
 var textManager = TextManager.GetInstance(currentCultureName);
 var title = textManager.GetText(Texts.Title);
-var version = "1.0.0";
+var version = "1.0.1";
 Console.Title = title;
 Console.WriteLine(textManager.GetText(Texts.WelcomeText, title, version));
 Console.WriteLine(textManager.GetText(Texts.RepoUrl, "https://github.com/QuickTestTools/PingTest"));
