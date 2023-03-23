@@ -43,7 +43,10 @@ Action<PingReply> setResult = t =>
     string result;
     if (currentIsSuccess)
     {
-        result = textManager.GetText(Texts.SuccessResult,t.RoundtripTime,t.Options.Ttl);
+        long? roundtripTime = null;
+        if (t.RoundtripTime > 0)
+            roundtripTime = t.RoundtripTime;
+        result = textManager.GetText(Texts.SuccessResult, roundtripTime, t.Options?.Ttl);
     }
     else
     {
