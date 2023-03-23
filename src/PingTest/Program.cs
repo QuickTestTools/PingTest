@@ -1,13 +1,28 @@
-﻿using System.Net.NetworkInformation;
+﻿using PingTest;
+using Quick.Localize;
+using System;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Reflection;
+using System.Threading;
 
-var title = "Ping测试工具";
+var currentCulture = Thread.CurrentThread.CurrentCulture;
+var textManager = TextManager.GetInstance(currentCulture.Name);
+var title = textManager.GetText(Texts.Title);
 var version = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
 Console.Title = title;
-Console.WriteLine($"欢迎使用{title}_v{version}");
-Console.WriteLine("仓库地址：https://github.com/QuickTestTools/PingTest");
-Console.Write("请输入IP地址：");
-var ipAddress = Console.ReadLine();
+Console.WriteLine(textManager.GetText(Texts.WelcomeText, title, version));
+Console.WriteLine(textManager.GetText(Texts.RepoUrl, "https://github.com/QuickTestTools/PingTest"));
+var dateFormat = textManager.GetText(Texts.DateFormat);
+string ipAddress = null;
+while (string.IsNullOrEmpty(ipAddress))
+{
+    Console.Write(textManager.GetText(Texts.PleaseInputIpAddress));
+    var line = Console.ReadLine();
+    if (IPAddress.TryParse(line, out _))
+        ipAddress = line;
+}
+
 Console.Title = $"{ipAddress} - {title}";
 var ping = new Ping();
 bool? success = null;
@@ -20,16 +35,16 @@ Action<PingReply> setResult = t =>
     success = currentIsSuccess;
 
     var currentTime = DateTime.Now;
-    var currentTimeStr = currentTime.ToString("yyyy-MM-dd HH:mm:ss");
+    var currentTimeStr = currentTime.ToString(dateFormat);
     
     string result;
     if (currentIsSuccess)
     {
-        result = $"成功,时间={t.RoundtripTime}ms,TTL={t.Options.Ttl}";
+        result = textManager.GetText(Texts.SuccessResult,t.RoundtripTime,t.Options.Ttl);
     }
     else
     {
-        result = $"失败，原因：{t.Status}";
+        result = textManager.GetText(Texts.FailedResult, t.Status);
     }
     Console.CursorLeft = 0;
     Console.Write(string.Empty.PadRight(Console.BufferWidth));
@@ -39,7 +54,7 @@ Action<PingReply> setResult = t =>
         var duration = string.Empty;
         if (lastChangeTime != null)
         {
-            duration = $",变化用时={currentTime - lastChangeTime.Value}";
+            duration = textManager.GetText(Texts.ChangeDuration, currentTime - lastChangeTime.Value);
         }
         lastChangeTime = currentTime;
         Console.WriteLine($"{currentTimeStr}: {result}{duration}");
@@ -49,7 +64,7 @@ Action<PingReply> setResult = t =>
         Console.Write($"[{currentTimeStr}: {result}]");
     }
 };
-Console.WriteLine("[按Ctrl+C终止程序]");
+Console.WriteLine(textManager.GetText(Texts.ExitProgramTip));
 while (true)
 {
     Thread.Sleep(1000);
@@ -60,6 +75,7 @@ while (true)
     }
     catch (Exception ex)
     {
-        Console.WriteLine($"测试错误，原因：{ex}");
+        Console.WriteLine(ex.ToString());
+        return -1;
     }
 }
