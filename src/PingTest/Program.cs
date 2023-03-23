@@ -49,9 +49,10 @@ Action<PingReply> setResult = t =>
     {
         result = textManager.GetText(Texts.FailedResult, t.Status);
     }
-    Console.CursorLeft = 0;
+    var cursorTop = Console.CursorTop;
+    Console.SetCursorPosition(0,cursorTop);
     Console.Write(string.Empty.PadRight(Console.BufferWidth));
-    Console.CursorLeft = 0;
+    Console.SetCursorPosition(0, cursorTop);
     if (isChanged)
     {
         var duration = string.Empty;
