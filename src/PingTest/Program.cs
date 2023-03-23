@@ -43,10 +43,7 @@ Action<PingReply> setResult = t =>
     string result;
     if (currentIsSuccess)
     {
-        long? roundtripTime = null;
-        if (t.RoundtripTime > 0)
-            roundtripTime = t.RoundtripTime;
-        result = textManager.GetText(Texts.SuccessResult, roundtripTime, t.Options?.Ttl);
+        result = textManager.GetText(Texts.SuccessResult, t.RoundtripTime, t.Options?.Ttl);
     }
     else
     {
@@ -54,7 +51,7 @@ Action<PingReply> setResult = t =>
     }
     var cursorTop = Console.CursorTop;
     Console.SetCursorPosition(0,cursorTop);
-    Console.Write(string.Empty.PadRight(Console.BufferWidth));
+    Console.Write(string.Empty.PadRight(Console.BufferWidth - 1));
     Console.SetCursorPosition(0, cursorTop);
     if (isChanged)
     {
