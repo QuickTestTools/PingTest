@@ -3,19 +3,17 @@ using Quick.Localize;
 using System;
 using System.Net;
 using System.Net.NetworkInformation;
-using System.Reflection;
 using System.Threading;
 
-var currentCultureName = Thread.CurrentThread.CurrentCulture?.Name;
-if (currentCultureName == null)
-    currentCultureName = "en-US";
-
-var textManager = TextManager.GetInstance(currentCultureName);
+var textManager = TextManager.DefaultInstance;
 var title = textManager.GetText(Texts.Title);
-var version = "1.0.1";
+var version = "1.0.2";
 Console.Title = title;
 Console.WriteLine(textManager.GetText(Texts.WelcomeText, title, version));
 Console.WriteLine(textManager.GetText(Texts.RepoUrl, "https://github.com/QuickTestTools/PingTest"));
+
+Console.Write(textManager.GetText(Texts.PleaseInputName));
+var name = Console.ReadLine();
 var dateFormat = textManager.GetText(Texts.DateFormat);
 string ipAddress = null;
 while (string.IsNullOrEmpty(ipAddress))
@@ -26,7 +24,7 @@ while (string.IsNullOrEmpty(ipAddress))
         ipAddress = line;
 }
 
-Console.Title = $"{ipAddress} - {title}";
+Console.Title = $"{name} - {ipAddress} - {title}";
 var ping = new Ping();
 bool? success = null;
 DateTime? lastChangeTime = null;

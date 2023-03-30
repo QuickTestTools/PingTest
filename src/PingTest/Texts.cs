@@ -17,6 +17,9 @@ namespace PingTest
         [Text("en-US", "Repo Url:{0}")]
         [Text("zh-CN", "仓库地址:{0}")]
         RepoUrl,
+        [Text("en-US", "Please input Name:")]
+        [Text("zh-CN", "请输入名称：")]
+        PleaseInputName,
         [Text("en-US", "Please input IPAddress:")]
         [Text("zh-CN", "请输入IP地址：")]
         PleaseInputIpAddress,
