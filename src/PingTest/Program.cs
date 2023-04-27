@@ -12,18 +12,27 @@ Console.Title = title;
 Console.WriteLine(textManager.GetText(Texts.WelcomeText, title, version));
 Console.WriteLine(textManager.GetText(Texts.RepoUrl, "https://github.com/QuickTestTools/PingTest"));
 
-Console.Write(textManager.GetText(Texts.PleaseInputName));
-var name = Console.ReadLine();
-var dateFormat = textManager.GetText(Texts.DateFormat);
+string name = null;
 string ipAddress = null;
-while (string.IsNullOrEmpty(ipAddress))
+if (args.Length >= 2)
 {
-    Console.Write(textManager.GetText(Texts.PleaseInputIpAddress));
-    var line = Console.ReadLine();
-    if (IPAddress.TryParse(line, out _))
-        ipAddress = line;
+    name = args[0];
+    ipAddress = args[1];
+}
+else
+{
+    Console.Write(textManager.GetText(Texts.PleaseInputName));
+    name = Console.ReadLine();
+    while (string.IsNullOrEmpty(ipAddress))
+    {
+        Console.Write(textManager.GetText(Texts.PleaseInputIpAddress));
+        var line = Console.ReadLine();
+        if (IPAddress.TryParse(line, out _))
+            ipAddress = line;
+    }
 }
 
+var dateFormat = textManager.GetText(Texts.DateFormat);
 Console.Title = $"{name} - {ipAddress} - {title}";
 var ping = new Ping();
 bool? success = null;

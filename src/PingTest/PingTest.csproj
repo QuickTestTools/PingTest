@@ -12,4 +12,8 @@
 		<PackageReference Include="Quick.Localize" Version="1.0.4" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
+
 </Project>
