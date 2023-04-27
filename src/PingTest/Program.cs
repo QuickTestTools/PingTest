@@ -7,7 +7,7 @@ using System.Threading;
 
 var textManager = TextManager.DefaultInstance;
 var title = textManager.GetText(Texts.Title);
-var version = "1.0.2";
+var version = "1.0.3";
 Console.Title = title;
 Console.WriteLine(textManager.GetText(Texts.WelcomeText, title, version));
 Console.WriteLine(textManager.GetText(Texts.RepoUrl, "https://github.com/QuickTestTools/PingTest"));
